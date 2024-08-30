@@ -1,0 +1,377 @@
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "luckiestguy";
+  background-image: url("img/3. Background/Legacy/Dark/1.png");
+  backdrop-filter: blur(5px);
+  background-position: center;
+  background-size: cover;
+  color: rgb(40, 230, 23);
+  font-size: 48px;
+}
+
+h1 {
+  margin-block: unset;
+  font-size: 60px;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.rotate{
+  color: #ff009d;
+ 
+}
+
+svg {
+  width: 48px;
+  aspect-ratio: 1;
+  transition: all 125;
+}
+
+svg:hover {
+  cursor: pointer;
+  scale: 1.05;
+  filter: drop-shadow(0px 0px 12px #c0c0c0);
+}
+
+.mainContainer {
+  width: 720px;
+  height: 480px;
+  position: relative;
+}
+
+.overlayed {
+  position: absolute;
+}
+
+canvas {
+  background-color: black;
+  border-radius: 20px;
+  display: block;
+  box-shadow: 0 0 20px rgba(100, 228, 254, 0.5);
+}
+
+
+#gameInfos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 720px;
+  height: 480px;
+  border-radius: 20px;
+  -webkit-text-stroke: 2px #000000;
+  background-color: rgba(89, 40, 223, 0.93);
+}
+
+.gameInfoMenu {
+  margin: 32px 0;
+  display: flex;
+  font-size: 36px;
+  gap: 32px;
+}
+
+.gameInfoNav:hover {
+  transition: all 125;
+  cursor: pointer;
+  scale: 1.05;
+  color: #4c1579;
+  filter: drop-shadow(0px 0px 12px white);
+}
+
+.activeSection {
+  color: #531b82;
+}
+
+.keyInstruction {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  font-size: 36px;
+  margin-top: 16px;
+  place-items: center;
+}
+
+.imgMovement {
+  height: 100px;
+}
+
+.imgRange {
+  height: 50px;
+}
+
+.imgMelee {
+  height: 50px;
+}
+
+.gametips {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 28px;
+  margin: 0 60px 0 32px;
+}
+
+.tip {
+  white-space: normal;
+}
+
+.gametips img {
+  height: 36px;
+  margin: 0 2px -6px 2px;
+}
+
+.imgJellifish {
+  height: unset !important;
+  width: 40px;
+  margin-bottom: -12px !important;
+}
+
+.imgPoision {
+  height: unset !important;
+  width: 48px;
+  margin: 0 -4px -8px -4px !important;
+}
+
+.sources {
+  display: flex;
+  flex-direction: column;
+  font-size: 32px;
+  gap: 16px;
+}
+
+.sources a {
+  text-decoration: none;
+  color: white;
+  -webkit-text-stroke: 2px #1f92b1;
+}
+
+.sources a:hover {
+  transition: all 125;
+  cursor: pointer;
+  scale: 1.05;
+  color: #1f92b1;
+
+  filter: drop-shadow(0px 0px 12px white);
+}
+
+.menu {
+  right: 8px;
+  top: calc(50% - 216px / 2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Endscreen */
+
+#startScreen {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.startScreenBg {
+  grid-row-start: 1;
+  grid-column-start: 1;
+  width: 720px;
+  height: 480px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(100, 228, 254, 0.5);
+}
+
+.startButton {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 240px;
+  height: 60px;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  transition: all 125;
+}
+
+.startButton:hover {
+  cursor: pointer;
+  scale: 1.05;
+  filter: drop-shadow(0px 0px 12px #ffffff);
+}
+
+.loading {
+  position: absolute;
+  margin-block: unset;
+  bottom: 40px;
+  right: 200px;
+  grid-row-start: 1;
+  grid-column-start: 1;
+}
+
+#gameover {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.restartButtonGameover {
+  position: absolute;
+  bottom: calc(50% - 40px);
+  left: calc(50% - 140px);
+  width: 280px;
+  height: 80px;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  transition: transform 125;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.restartButtonGameover:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  filter: drop-shadow(0px 0px 12px #ffffff);
+}
+.visible {
+  opacity: 1 !important;
+}
+
+#endScreen {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.restartButtonEndscreen {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 240px;
+  height: 60px;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  transition: transform 125;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Mobile view */
+
+.restartButtonEndscreen:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  filter: drop-shadow(0px 0px 12px #ffffff);
+}
+
+.mobileButtons {
+  background-color: rgba(255, 224, 127, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 33px;
+  aspect-ratio: 1;
+  border-radius: 45%;
+  border: 4px solid white;
+}
+
+.mobileButtons:hover,
+.activeMobileButton {
+  cursor: pointer;
+  background-color: #531b82;
+  transform: scale(1.1);
+}
+
+#movementMobile {
+  left: 16px;
+  bottom: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  grid-template-rows: repeat(3, 1fr); }
+
+#moveUp {
+  grid-area: 1 / 2;
+}
+
+#moveLeft {
+  grid-area: 2 / 1;
+}
+
+#moveRight {
+  grid-area: 2 / 3;
+}
+
+#moveDown {
+  grid-area: 3 / 2;
+}
+
+#attackMobile {
+  right: 16px;
+  bottom: 16px;
+  gap: 32px;
+  display: flex;
+}
+
+#forceLandscapeMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+ 
+}
+
+#forceLandscapeMobile span {
+  filter: drop-shadow(0px 0px 2px #9c4141);
+}
+
+
+.svg-iconTurnDevice {
+  width: 70%;
+  filter: drop-shadow(0px 0px 5px #0cd3d3);
+}
+
+.fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  border-radius: unset !important;
+}
+
+
+footer{
+  display: flex;
+  justify-content: center;
+
+}
+
+.impressum {
+  color: #51e97e;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 300;
+} 
+
+
+.impressum:hover {
+  color: #ffffff;
+  text-decoration: underline;
+ cursor: pointer;
+} 
+
+@media (max-width: 1023px) and (orientation: landscape),
+       (max-width: 1112px) and (orientation: landscape),
+       (max-width: 1366px) and (orientation: landscape) {
+  .mobileButtons {
+    display: flex !important;
+  }
+}

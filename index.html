@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html translate="no" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./css/font.css" />
+    <link rel="stylesheet" href="./css/media-queries.css" />
+
+    <script src="./models/drawable-object.class.js" defer></script>
+    <script src="./models/movable-object.class.js" defer></script>
+    <script src="./models/statusbar.class.js" defer></script>
+    <script src="./models/world.class.js" defer></script>
+    <script src="./models/character-images.js" defer></script>
+    <script src="./models/character.class.js" defer></script>
+    <script src="./models/green-fish.class.js" defer></script>
+    <script src="./models/red-fish.class.js" defer></script>
+    <script src="./models/jellfish-yellow.class.js" defer></script>
+    <script src="./models/jellfish-green.class.js" defer></script>
+    <script src="./models/background-object.class.js" defer></script>
+    <script src="./models/hp-bar.class.js" defer></script>
+    <script src="./models/poison-bar.class.js" defer></script>
+    <script src="./models/coin-bar.class.js" defer></script>
+    <script src="./models/hp-bar-endboss.class.js" defer></script>
+    <script src="./models/keyboard.class.js" defer></script>
+    <script src="./models/level.class.js" defer></script>
+    <script src="./models/endboss.class.js" defer></script>
+    <script src="./models/coin.class.js" defer></script>
+    <script src="./models/poison.class.js" defer></script>
+    <script src="./models/melee-attack.class.js" defer></script>
+    <script src="./models/shootable-object.class.js" defer></script>
+    <script src="./levels/level1.js" defer></script>
+    <script src="./js/games.js" defer></script>
+    <script src="./js/main.js" defer></script>
+
+    <title>Sharkie</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./img/favion.png"
+    />
+  </head>
+  <body onload="init()">
+    <h1>Sharkie</h1>
+    <div class="mainContainer" id="mainContainer">
+      <canvas class="overlayed" id="canvas" width="720" height="480"></canvas>
+  
+      <div class="overlayed d-none" id="movementMobile">
+        <div class="mobileButtons" id="moveUp">
+          <svg class="svg-iconMoveUp">
+            <use xlink:href="./img/icons.svg#svg-iconMoveUp" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+          </svg>
+        </div>
+        <div class="mobileButtons" id="moveRight">
+          <svg class="svg-iconMoveRight">
+            <use xlink:href="./img/icons.svg#svg-iconMoveRight" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+          </svg>
+        </div>
+        <div class="mobileButtons" id="moveDown">
+          <svg class="svg-iconMoveDown">
+            <use xlink:href="./img/icons.svg#svg-iconMoveDown" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+          </svg>
+        </div>
+        <div class="mobileButtons" id="moveLeft">
+          <svg class="svg-iconMoveLeft">
+            <use xlink:href="./img/icons.svg#svg-iconMoveLeft" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+          </svg>
+        </div>
+      </div>
+  
+      <div class="overlayed d-none" id="attackMobile">
+        <div class="mobileButtons" id="meleeAttack">
+          <svg class="svg-iconMelee">
+            <use xlink:href="./img/icons.svg#svg-iconMelee" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+          </svg>
+        </div>
+        <div class="mobileButtons" id="rangeAttack">
+          <svg class="svg-iconRange">
+            <use xlink:href="./img/icons.svg#svg-iconRange" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+          </svg>
+        </div>
+        
+      </div>
+
+      <div class="overlayed" id="startScreen">
+        <img
+          id="startScreenBg"
+          class="startScreenBg"
+          src="./img/startScreen.png"
+          alt="Start Screen"
+        />
+        <img
+          id="startButton"
+          onclick="startGame()"
+          class="startButton"
+          src="./img/6.Botones/Start/2.png"
+          alt="Start Button"
+        />
+      </div>
+
+      <div class="overlayed d-none" id="gameover">
+        <img
+          id="gameoverScreenBg"
+          class="startScreenBg"
+          src="./img/GameOverScreen.png"
+          alt="Game Over Screen"
+        />
+        <img
+          id="restartButtonGameover"
+          onclick="restartGame()"
+          class="restartButtonGameover d-none"
+          src="./img/6.Botones/Try again/Recurso 17.png"
+          alt="Restart Button"
+        />
+      </div>
+
+      <div class="overlayed d-none" id="endScreen">
+        <img
+          id="endScreenBg"
+          class="startScreenBg"
+          src="./img/endScreen.png"
+          alt="End Screen"
+        />
+        <img
+          id="restartButtonEndscreen"
+          onclick="restartGame()"
+          class="restartButtonEndscreen d-none"
+          src="./img/6.Botones/Try again/Recurso 17.png"
+          alt="Restart Button"
+        />
+      </div>
+
+      <div class="overlayed d-none" id="gameInfos">
+        <div class="gameInfoMenu">
+          <div
+            class="gameInfoNav activeSection"
+            id="controls"
+            onclick="openInfoSection('controls')"
+          >
+            controls
+          </div>
+          <div class="gameInfoNav" id="tips" onclick="openInfoSection('tips')">
+            tips
+          </div>
+          <div
+            class="gameInfoNav"
+            id="sources"
+            onclick="openInfoSection('sources')"
+          >
+            sources
+          </div>
+        </div>
+        <div>
+          <div id="controlsContent" class="keyInstruction">
+            <img
+              class="imgMovement"
+              src="img/6.Botones/Key/arrow keys.png"
+              alt="Movement Keys"
+            />
+            <span>Move Sharkie</span>
+            <img
+              class="imgRange"
+              src="img/6.Botones/Key/D key.png"
+              alt="Range Attack Key"
+            />
+            <span>Shoot Bubble</span>
+            <img
+              class="imgMelee"
+              src="img/6.Botones/Key/Space Bar key.png"
+              alt="Melee Attack Key"
+            />
+            <span>Melee Attack</span>
+          </div>
+          <div class="gametips d-none" id="tipsContent">
+            <div class="tip">
+              <span>your melee attacks only damages</span>
+              <img src="./img/tips/fish.png" alt="fish" />
+            </div>
+            <div class="tip">
+              <span>your range attacks only damages</span>
+              <img
+                class="imgJellifish"
+                src="./img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png"
+                alt="Jellifish"
+              />
+              <span>and the endboss</span>
+            </div>
+
+            <div class="tip">
+              <span>collect</span>
+              <img
+                class="imgPoision"
+                src="./img/4. Marcadores/Posiขn/Animada/5.png"
+                alt="Poision"
+              />
+              <span>in order to deal increase damage to the endboss</span>
+            </div>
+            <div class="tip">
+              <span>collect 10</span>
+              <img src="./img/4. Marcadores/1. Coins/1.png" alt="Coins" />
+              <span>in order to get one extra</span>
+              <img src="./img/tips/live.png" alt="Live" />
+            </div>
+          </div>
+          <div class="sources d-none" id="sourcesContent">
+            <div>
+              sound from
+              <a href="https://freesound.org/" target="_blank">freesound.org</a>
+            </div>
+            <div>
+              icons from
+              <a href="https://tablericons.com/" target="_blank"
+                >tablericons.com</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlayed menu">
+        <svg
+          class="svg-iconFullscreen"
+          onclick="toggleFullscreen()"
+          id="fullscreen"
+        >
+          <use
+            xlink:href="./img/icons.svg#svg-iconFullscreen"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          ></use>
+        </svg>
+        <svg
+          class="svg-iconCloseFullscreen d-none"
+          onclick="toggleFullscreen()"
+          id="noFullscreen"
+        >
+          <use
+            xlink:href="./img/icons.svg#svg-iconCloseFullscreen"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          ></use>
+        </svg>
+
+        <svg class="svg-iconMenu" onclick="toggleMenu()" id="openMenu">
+          <use
+            xlink:href="./img/icons.svg#svg-iconMenu"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          ></use>
+        </svg>
+        <svg class="svg-iconClose d-none" onclick="toggleMenu()" id="closeMenu">
+          <use
+            xlink:href="./img/icons.svg#svg-iconClose"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          ></use>
+        </svg>
+
+        <svg class="svg-iconSoundOn" onclick="toggleSound()" id="sound">
+          <use
+            xlink:href="./img/icons.svg#svg-iconSoundOn"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          ></use>
+        </svg>
+        <svg
+          class="svg-iconSoundOff d-none"
+          onclick="toggleSound()"
+          id="noSound"
+        >
+          <use
+            xlink:href="./img/icons.svg#svg-iconSoundOff"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          ></use>
+        </svg>
+
+        <svg class="svg-iconPause d-none" id="noPause" onclick="togglePause()">
+          <use
+            xlink:href="./img/icons.svg#svg-iconPause"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          ></use>
+        </svg>
+        <svg class="svg-iconPlay d-none" id="pause" onclick="togglePause()">
+          <use
+            xlink:href="./img/icons.svg#svg-iconPlay"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          ></use>
+        </svg>
+      </div>
+    </div>
+
+    <div id="forceLandscapeMobile" class="d-none">
+      <span class="rotate"> please rotate your device</span>
+
+      <svg class="svg-iconTurnDevice">
+        <use
+          xlink:href="./img/icons.svg#svg-iconTurnDevice"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        ></use>
+      </svg>
+    </div>
+
+<footer>
+  <a class="impressum" href="./impressum.html">Impressum</a>
+</footer>
+
+  </body>
+</html>
